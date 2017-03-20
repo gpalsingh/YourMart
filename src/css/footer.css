@@ -1,0 +1,15 @@
+.footer {
+	float: center;
+}
+.project-left {
+	margin-right: auto;
+	margin-left: 0;
+	float: left;
+	text-transform: uppercase;
+}
+.names {
+	margin-left: auto;
+	margin-right: 0;
+	text-align: right;
+	text-transform: capitalize;
+}

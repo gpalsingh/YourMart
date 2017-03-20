@@ -1,3 +1,9 @@
+# Temp files
+*~
+
+# Database
+phpmyadmin
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
