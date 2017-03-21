@@ -7,8 +7,8 @@ include_once "header.php"
 <div class="content">
 <h1>Registeration for YourMart</h1>
 <form id="signup-form" action="registered.php" method="POST">
-Name: <input type="text" name="first_name" placeholder="First Name" id="person-name-first" maxlenght="30" onChange="checkFirstName();">
-<input type="text" name="last_name" placeholder="Last Name" id="person-name-last" maxlenght="30" onChange="checkLastName();">
+Name: <input type="text" name="first_name" placeholder="First Name" id="person-name-first" maxlength="30" onChange="checkFirstName();">
+<input type="text" name="last_name" placeholder="Last Name" id="person-name-last" maxlength="30" onChange="checkLastName();">
 <br>
 <span id="person-name-first-errors" class="hidden"><br></span>
 <span id="person-name-last-errors" class="hidden"><br></span>
