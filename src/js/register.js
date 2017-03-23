@@ -145,7 +145,7 @@ function checkUsernameValid() {
 		validValues[id] = false;
 		uname_errors.innerHTML += "Username must have at least 8 characters at least.<br>";
 	} else {
-		validvalues[id] = true;
+		validValues[id] = true;
 	}
 
 	//Cleanup
@@ -228,7 +228,8 @@ function checkAgreeTerms() {
 
 $(document).ready(function() {
 	$("#signup-form").submit(function checkFormValid(e) {
-		e.preventDefault();
+		//page doesn't load if default action prevented :/
+		//e.preventDefault();
 		checkFirstName();
 		checkLastName();
 		checkEmailValid();
@@ -239,11 +240,12 @@ $(document).ready(function() {
 		checkAgreeTerms();
 		for (var key in validValues) {
 			if (!validValues[key]) {
+				console.log(key);
 				alert("Please fix the requested errors first.");
 				return false;
 			}
 		}
 
-		return false;
+		return true;
 	});
 });
