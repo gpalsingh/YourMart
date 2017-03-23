@@ -4,8 +4,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <a href="about.php">About Us</a>
 <a href="terms.php">Terms</a>
-<input type="text" placeholder="search">
-<a href="signin.php">sign-in</a>
+<input type="text" placeholder="search"> sign-in
 <a href="register.php">Register</a>
 cart
 </div>
