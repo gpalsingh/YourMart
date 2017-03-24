@@ -1,4 +1,4 @@
-<html><head> <title>Register</title></head>
+<html><head><title>Register</title></head>
 <body>
 <?php
 include_once "header.php"
