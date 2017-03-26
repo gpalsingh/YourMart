@@ -29,7 +29,8 @@ Gender: <select name="gender">
 </select>
 <br>
 <!--Make it "I FIRST NAME agree.."-->
-<input type="checkbox" id="agree-terms" onChange="checkAgreeTerms();">I agree to the terms and conditions<br>
+<input type="checkbox" id="agree-terms" onChange="checkAgreeTerms();">
+I <span id="person-name" style="text-transform: capitalize;"></span> agree to the terms and conditions<br>
 <span id="agree-terms-errors" class="hidden"><br></span>
 <button type="submit">Submit</button>
 </form>

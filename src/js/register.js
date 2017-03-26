@@ -40,13 +40,11 @@ function checkFirstName() {
 		first_name_errors.innerHTML += "First name must be at least 3 characters long.<br>";
 	} else {
 		validValues[id] = true;
+		getById("person-name").innerHTML = first_name.value + ",";
 	}
 
 	//Cleanup
 	if (!validValues[id]) {
-		//Add break to make it look nice
-		//Most likely not needed
-		//first_name_errors.innerHTML.concat("<br>");
 		//Reset visibility
 		first_name_errors.setAttribute("class", "form-errors");
 	} else {
