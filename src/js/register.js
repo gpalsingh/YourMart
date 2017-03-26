@@ -2,16 +2,6 @@ function getById(id) {
 	return document.getElementById(id);
 }
 
-function getOrCreateErrorNode(id, parent_id) {
-	var node = document.getElementById(id);
-	if (node == null) {
-		node = document.createTextNode("");
-		node.id = id;
-		insertBefore(node, getById(parent_id));
-	}
-	return node;
-}
-
 function getErrorField(id) {
 	errors_field = getById(id.concat("-errors"));
 	errors_field.innerHTML = "";
