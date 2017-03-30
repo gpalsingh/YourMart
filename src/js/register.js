@@ -1,13 +1,3 @@
-function getById(id) {
-	return document.getElementById(id);
-}
-
-function getErrorField(id) {
-	errors_field = getById(id.concat("-errors"));
-	errors_field.innerHTML = "";
-	return errors_field;
-}
-
 var validValues = {
 	"person-name-first": false,
 	"person-name-last": false,

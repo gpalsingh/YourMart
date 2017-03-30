@@ -19,4 +19,11 @@ function start_new_session() {
 		session_start();
 	}
 }
+
+function clean_data($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 ?>
