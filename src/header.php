@@ -17,7 +17,10 @@
 <a href="about.php">About Us</a>
 <a href="terms.php">Terms</a>
 <a href="index.php">Home</a>
-<input type="text" placeholder="search">
+<form name="search-form" action="index.php" method="GET">
+<input type="text" placeholder="Search" name="searchkey" id="searchkey" required>
+<button type="submit">GO!</button>
+</form>
 <?php if(!$_SESSION['valid'] == true) { ?>
 <a href="signin.php">Sign-in</a>
 <a href="register.php">Register</a>
