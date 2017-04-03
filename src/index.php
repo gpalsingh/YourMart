@@ -13,7 +13,7 @@ if (isset($_GET['startpos']) && !empty($_GET['startpos'])) {
 }
 
 //Enter data into database
-$conn = new mysqli("localhost", "pma", "pmapass", "yourmart");
+$conn = getDbConnection();
 if (!$conn) {
 	echo "Could not connect to database";
 } else {

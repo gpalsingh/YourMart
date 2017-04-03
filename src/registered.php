@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$person_data["gender"] = (clean_data($_POST["gender"]) == "Male" ? 1 : 0);
 
 	//Enter data into database
-	$conn = new mysqli("localhost", "pma", "pmapass", "yourmart");
+	$conn = getDbConnection();
 	if (!$conn) {
 		echo "<span class=\"form-errors\">Could not connect to database :(</span>";
 		die(0);

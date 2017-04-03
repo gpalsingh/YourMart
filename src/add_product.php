@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$units = $_POST['product-units'];
 	$seller = $_SESSION['username'];
 
-	$conn = new mysqli("localhost", "pma", "pmapass", "yourmart");
+	$conn = getDbConnection();
 	if ($desc) {
 		$query_base = "INSERT INTO product_data (title, price, description, seller, units_left) VALUES ('%s', %d, '%s', '%s', %d);";
 		$query_string = sprintf($query_base, $title, $price, $desc, $seller, $units);

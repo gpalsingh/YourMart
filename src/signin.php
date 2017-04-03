@@ -7,7 +7,7 @@ start_new_session();
 
 function isValidUser($uname, $pass) {
 	global $errors_list;
-	$conn = new mysqli("localhost", "pma", "pmapass", "yourmart");
+	$conn = getDbConnection();
 	if (!$conn) {
 		array_push($errors_list, "Cannot connect to database :(");
 		$conn->close();
