@@ -3,6 +3,8 @@
 <?php
 include_once "header.php";
 ?>
+<div class="content">
+<h1>Welcome to YourMart</h1>
 <?php
 $start_pos = 0;
 $page_size = 10;
@@ -26,20 +28,15 @@ if ($result === FALSE) {
 	die(0);
 }
 }
-?>
-<div class="content">
-<h1>Welcome to YourMart</h1>
-<?php
 if ($result->num_rows > 0) {
-	echo "<table><tr><th>Title<th><th>Price</th><th>Description</th>";
-	echo "<th>Seller</th><th>Units left</th></tr>";
+	echo "<table><tr><th>Title<th><th>Price</th>";
+	echo "<th>Units left</th></tr>";
 	while($row = $result->fetch_assoc()) {
-		$row_str = "<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>";
+		$row_str = "<tr><td><a href=\"%s\">%s</td><td>%s</td><td>%d</td></tr>";
 		echo sprintf($row_str,
+				"show_product.php?id=".$row['id'],
 				$row['title'],
 				$row['price'],
-				$row['description'],
-				$row['seller'],
 				$row['units_left']);
 	}
 	echo "</table>";
