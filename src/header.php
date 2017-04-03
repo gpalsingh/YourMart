@@ -24,5 +24,5 @@
 <?php } else { ?>
 <a href="add_product.php">Sell</a>
 <a href="http://localhost?logout=true">Logout</a>
-<?php } ?>
+<?php echo '(' . $_SESSION['username'] . ')'; } ?>
 </div>
