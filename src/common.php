@@ -26,4 +26,9 @@ function clean_data($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
+
+function getDbConnection() {
+	$conn = new mysqli("localhost", "pma", "pmapass", "yourmart");
+	return $conn;
+}
 ?>
