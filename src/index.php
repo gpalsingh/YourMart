@@ -14,13 +14,15 @@ if (!$conn) {
 
 //Find query type
 $start_pos = 0;
-$page_size = 10;
+$page_size = 4;
 $search_key = FALSE;
 if (isset($_GET['searchkey']) && !empty($_GET['searchkey'])) {
 	$search_key = $_GET['searchkey'];
 }
 if (isset($_GET['startpos']) && !empty($_GET['startpos'])) {
 	$start_pos = $_GET['startpos'];
+	//start_pos must be multiple of page_size
+	$start_pos -= $start_pos % $page_size;
 }
 
 //Get data from database
@@ -68,19 +70,19 @@ if ($total_items > 0) {
 //Navigation
 $curr_page = (int)($start_pos / $page_size);
 $last_page = (int)($total_items / $page_size);
-if (($last_page % $page_size) == 0) {
+if (($last_page * $page_size) == $total_items) {
 	$last_page--;
 }
 echo "Page:";
 echo "<table>";
 if ($curr_page > 0) {
 	echo "<td><a href=index.php?startpos=0>&lt;&lt;</a></td>";
-	echo "<td><a href=index.php?startpos=",$curr_page-1,">",$curr_page,"</a></td>";
+	echo "<td><a href=index.php?startpos=",$start_pos-$page_size,">",$curr_page,"</a></td>";
 }
 echo "<td>" , $curr_page + 1 , "</td>";
 if ($last_page > $curr_page) {
-	echo "<td><a href=index.php?startpos=",$curr_page+1,">",$curr_page+2,"</a></td>";
-	echo "<td><a href=index.php?startpos=$last_page>&gt;&gt;</a></td>";
+	echo "<td><a href=index.php?startpos=",$start_pos+$page_size,">",$curr_page+2,"</a></td>";
+	echo "<td><a href=index.php?startpos=",$last_page*$page_size,">&gt;&gt;</a></td>";
 }
 echo "</table>";
 } else {
