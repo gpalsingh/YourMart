@@ -6,3 +6,15 @@
 	display: block;
 	color: red;
 }
+
+.error-general {
+	display: block;
+	color: red;
+	font-weight: bold;
+}
+
+.success-general {
+	display: block;
+	color: green;
+	font-weight: bold;
+}

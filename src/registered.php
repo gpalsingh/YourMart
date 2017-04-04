@@ -19,10 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	//Enter data into database
 	$conn = getDbConnection();
-	if (!$conn) {
-		echo "<span class=\"form-errors\">Could not connect to database :(</span>";
-		die(0);
-	}
 
 	//Construct query
 	$sql_generic = "INSERT INTO user_data (first_name, last_name, email, username,"
@@ -36,14 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$person_data["password"],
 		$person_data["gender"]);
 	
-	//debug
-	//echo $sql;
-
 	//Insert the data
 	$query_success = $conn->query($sql);
 
 	if ($query_success === TRUE) {
-		echo "New use created with following data:<br>";
+		show_success_msg("New use created with following data:<br>");
 
 		echo "<table><tr><th>Field</th><th>Value</th></tr>";
 		foreach ($person_data as $field => $val) {
@@ -51,8 +44,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 		echo "</table>";
 	} else {
-		echo "<span class=\"form-errors\">Unable to create new user<br>";
-		echo "Error: " . $conn->error . "</span>";
+		//close the connection
+		$conn->close();
+		show_error_msg("Unable to create new user<br>");
+		die(error_msg("Error: " . $conn->error));
 	}
 
 	//close the connection

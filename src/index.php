@@ -8,9 +8,6 @@ include_once "header.php";
 <?php
 //Connect to database
 $conn = getDbConnection();
-if (!$conn) {
-	die("Could not connect to database");
-}
 
 //Find query type
 $start_pos = 0;
@@ -49,8 +46,8 @@ if ($search_key === FALSE) {
 }
 $result = $conn->query($sql);
 if ($result === FALSE) {
-	echo "Failed to get data<br>";
-	die($conn->error);
+	show_error_msg("Failed to get data<br>");
+	die(error_msg($conn->error));
 }
 if ($result->num_rows > 0) {
 	echo "<table><tr><th>Title<th><th>Price</th>";
@@ -64,9 +61,7 @@ if ($result->num_rows > 0) {
 				$row['units_left']);
 	}
 	echo "</table>";
-}
 
-if ($total_items > 0) {
 //Navigation
 $curr_page = (int)($start_pos / $page_size);
 $last_page = (int)($total_items / $page_size);
@@ -86,7 +81,7 @@ if ($last_page > $curr_page) {
 }
 echo "</table>";
 } else {
-	echo "No itmes found";
+	show_error_msg("No items found.");
 }
 ?>
 </div>

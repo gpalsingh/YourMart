@@ -9,27 +9,27 @@ include_once "header.php";
 $id = -1;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$conn = getDbConnection();
-	if (!$conn) {
-		die("Cannot connect to database.");
-	}
 	if (isset($_POST["delete_button"])) {
 		//Check if user owns the item
 		$sql = "SELECT * FROM product_data WHERE id=" . $_POST["pid"];
 		$result = $conn->query($sql);
 		if ($result === FALSE) {
-			die("Can't find product data.");
+			die(error_msg("Can't find product data."));
 		}
 		$row = $result->fetch_assoc();
 		if ($row['seller'] !== $_SESSION['username']) {
-			die("User doesn not own the item.");
+			die(error_msg("User doesn not own the item."));
 		}
 		//Delete the item
 		$sql = "DELETE FROM product_data WHERE id=" . $_POST["pid"];
 		$result = $conn->query($sql);
 		if (($result === FALSE) || ($conn->affected_rows < 1)) {
-			echo "Failed to delete the data.";
+			show_error_msg("Failed to delete the data.");
+			$e = $conn->error;
+			$conn->close();
+			die(error_msg("Error: " . $e));
 		} else {
-			echo "Product data deleted sucessfully";
+			show_success_msg("Product data deleted sucessfully");
 		}
 	} else {
 		//Assume update.
@@ -44,10 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$_POST['pid']);
 		$result = $conn->query($sql);
 		if ($result === FALSE) {
-			echo "Failed to update data<br>";
-			die($conn->error);
+			show_error_msg("Failed to update data<br>");
+			$e = $conn->error;
+			$conn->close();
+			die(error_msg("Error: " . $e));
 		}
-		echo "Sucessfully updated the data";
+		show_success_msg("Sucessfully updated the data");
 		$conn->close();
 		//Redirect to product page
 		header("location:show_product.php?id=" . $_POST['pid']);
@@ -58,7 +60,7 @@ else { //GET request code start
 if (isset($_GET['id']) && !empty($_GET['id'])) {
 	$id = $_GET['id'];
 } else {
-	die("Product not found");
+	die(error_msg("Product not found"));
 }
 //Get data
 $uname = ($_SESSION['valid'] === true)? $_SESSION['username']: false;
@@ -67,7 +69,7 @@ $sql = "SELECT * FROM product_data WHERE id=" . $id;
 $result = $conn->query($sql);
 if ($conn->affected_rows < 1) {
 	$conn->close();
-	die("Failed to get data. Product does not exist.");
+	die(error_msg("Failed to get data. Product does not exist."));
 }
 //Show product data
 if ($result->num_rows > 0) {
