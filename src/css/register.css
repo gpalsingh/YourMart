@@ -1,0 +1,32 @@
+#signup-form {
+    background-color: #afe0af;
+    border-radius: 30px;
+    padding: 2% 0px 1% 2%;
+}
+
+#signup-form input:not([type="checkbox"]) {
+    padding: 6px;
+    margin: 0px 20px 15px 0px;
+    border-radius: 17px;
+    width: 45%;
+}
+
+#button-container {
+    text-align: center;
+    margin: 3%;
+}
+
+#button-container button {
+    height: 5%;
+    width: 40%;
+    border-radius: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    background-color: #2874F0;
+}
+
+#button-container button:hover {
+	background-color: yellow;
+	color: #f44;
+}

@@ -19,7 +19,7 @@
 <li><a href="terms.php">Terms</a></li>
 <li><a href="index.php">Home</a></li>
 <li>
-<form name="search-form" action="index.php" method="GET">
+<form name="search-form-header" id="search-form-header" action="index.php" method="GET">
 <li><input type="text" placeholder="Search" name="searchkey" id="searchkey" required></li>
 <li><button type="submit">GO!</button></li>
 </form>

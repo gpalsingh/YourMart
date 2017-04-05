@@ -5,6 +5,8 @@
 	list-style-type: none;
 	display: block;
 	overflow: hidden;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .header li {
@@ -26,9 +28,13 @@
 	color: black;
 }
 
-.header li form {
+.search-form-header {
 	margin: 0;
 	padding: 0;
+}
+
+#search-form-header input, #search-form-header button {
+	border-radius: 5px;
 }
 
 .content > * {
