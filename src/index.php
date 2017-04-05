@@ -50,7 +50,7 @@ if ($result === FALSE) {
 	die(error_msg($conn->error));
 }
 if ($result->num_rows > 0) {
-	echo "<table><tr><th>Title<th><th>Price</th>";
+	echo '<table class="items-list-table"><tr><th>Title</th><th>Price</th>';
 	echo "<th>Units left</th></tr>";
 	while($row = $result->fetch_assoc()) {
 		$row_str = '<tr><td><a href="%s">%s</td><td>%s</td><td>%d</td></tr>';
@@ -68,16 +68,19 @@ $last_page = (int)($total_items / $page_size);
 if (($last_page * $page_size) == $total_items) {
 	$last_page--;
 }
-echo "Page:";
-echo "<table>";
+echo '<table class="nav-items-list" alink="yellow" vlink="red"><caption>Page:</caption>';
 if ($curr_page > 0) {
-	echo "<td><a href=index.php?startpos=0>&lt;&lt;</a></td>";
-	echo "<td><a href=index.php?startpos=",$start_pos-$page_size,">",$curr_page,"</a></td>";
+	echo "<td><a href=index.php?startpos=0><div>&lt;&lt;</div></a></td>";
+	echo "<td><a href=index.php?startpos=",$start_pos-$page_size,"><div>",$curr_page,"</div></a></td>";
+} else {
+	echo "<td></td><td></td>";
 }
 echo "<td>" , $curr_page + 1 , "</td>";
 if ($last_page > $curr_page) {
-	echo "<td><a href=index.php?startpos=",$start_pos+$page_size,">",$curr_page+2,"</a></td>";
-	echo "<td><a href=index.php?startpos=",$last_page*$page_size,">&gt;&gt;</a></td>";
+	echo "<td><a href=index.php?startpos=",$start_pos+$page_size,"><div>",$curr_page+2,"</div></a></td>";
+	echo "<td><a href=index.php?startpos=",$last_page*$page_size,"><div>&gt;&gt;</div></a></td>";
+} else {
+	echo "<td></td><td></td>";
 }
 echo "</table>";
 } else {

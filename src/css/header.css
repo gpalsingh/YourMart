@@ -1,0 +1,94 @@
+.header {
+	background-color: #2874F0;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	display: block;
+	overflow: hidden;
+}
+
+.header li {
+	display: inline;
+	float: left;
+	padding: 8px;
+}
+
+.header li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.header li a:hover {
+	background-color: yellow;
+	color: black;
+}
+
+.header li form {
+	margin: 0;
+	padding: 0;
+}
+
+.content > * {
+	margin: auto;
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+}
+
+body {
+	background-color: #efe;
+	margin: 0;
+}
+
+.items-list-table td:not(:first-child) {
+	margin: auto;
+	text-align: center;
+	width: 50%;
+}
+
+.nav-items-list {
+	padding: 1rem;
+}
+
+.nav-items-list th, .nav-items-list td {
+	width: 30%;
+}
+
+.nav-items-list td {
+	padding: 0;
+	width: 20%;
+	text-align: center;
+	background-color: rgb(221, 238, 255);
+	font-weight: bold;
+}
+
+.nav-items-list div:hover {
+	background-color: #f44;
+}
+
+.nav-items-list div, .nav-items-list td {
+	border-radius: 10px;
+}
+
+.nav-items-list a {
+    text-decoration: none;
+}
+
+.nav-items-list a:link, .nav-items-list a:visited {
+	color: blue;
+}
+
+.nav-items-list a:hover {
+	color: yellow;
+}
+
+.nav-items-list a:active {
+	color: red;
+}
+
+.content * {
+	border: 0px solid red;
+}

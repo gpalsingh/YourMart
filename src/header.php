@@ -10,22 +10,28 @@
 		initSession();
 	}
 ?>
-<div class="header">
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/header.css">
 <script src="js/common.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<a href="about.php">About Us</a>
-<a href="terms.php">Terms</a>
-<a href="index.php">Home</a>
+<ul class="header test">
+<li><a href="about.php">About Us</a></li>
+<li><a href="terms.php">Terms</a></li>
+<li><a href="index.php">Home</a></li>
+<li>
 <form name="search-form" action="index.php" method="GET">
-<input type="text" placeholder="Search" name="searchkey" id="searchkey" required>
-<button type="submit">GO!</button>
+<li><input type="text" placeholder="Search" name="searchkey" id="searchkey" required></li>
+<li><button type="submit">GO!</button></li>
 </form>
+</li>
 <?php if(!$_SESSION['valid'] == true) { ?>
-<a href="signin.php">Sign-in</a>
-<a href="register.php">Register</a>
+<li><a href="signin.php">Sign-in</a></li>
+<li><a href="register.php">Register</a></li>
 <?php } else { ?>
-<a href="add_product.php">Sell</a>
-<a href="http://localhost?logout=true">Logout</a>
+<li><a href="add_product.php">Sell</a></li>
+<li><a href="http://localhost?logout=true">Logout
 <?php echo '(' . $_SESSION['username'] . ')'; } ?>
-</div>
+</a>
+</li>
+</ul>
+<br>
