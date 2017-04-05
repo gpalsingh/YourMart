@@ -5,6 +5,7 @@ include_once "header.php"
 ?>
 <div class="content">
 <h1>Sign-in to YourMart</h1>
+<link rel="stylesheet" href="css/signin.css">
 <?php
 start_new_session();
 
@@ -36,12 +37,14 @@ if (isset($_POST['login_button']) && !empty($_POST['username']) && !empty($_POST
 
 $show_form = !(($_SERVER['REQUEST_METHOD'] === 'POST') && $_SESSION['valid']);
 if ($show_form) { ?>
-<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
-Username: <input type=text name="username" placeholder="Your username" required autofocus>
+<form id="signin-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
+Username:<br><input type=text name="username" placeholder="Your username" required autofocus>
 <br>
-Password: <input type=password name="password" placeholder="Your password" required>
+Password:<br><input type=password name="password" placeholder="Your password" required>
 <br>
+<div id="button-container">
 <button type="submit" name="login_button">Login</button>
+</div>
 <form>
 <?php } else { show_success_msg("Welcome, $username."); } ?>
 </div>
