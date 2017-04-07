@@ -4,6 +4,7 @@
 include_once "header.php";
 ?>
 <div class="content">
+<h1>Add product data</h1>
 <?php if($_SESSION['valid'] === true) {?>
 <script type="text/javascript">
 var validValues = {
@@ -39,7 +40,6 @@ $(document).ready(function() {
 	});
 });
 </script>
-<h1>Add product data</h1>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$title = clean_data($_POST['product-title']);
@@ -58,23 +58,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	}
 	$sql = $conn->query($query_string);
 	if (($conn->affected_rows) < 1) {
-		echo "Failed to enter data.</br>";
-		echo $conn->error;
+		show_error_msg("Failed to enter data.</br>");
+		$e = $conn->error;
+		$conn->close();
+		die(error_msg("Error: ".$e));
 	} else {
-		echo "Entered data successfully.";
+		show_success_msg("Entered data successfully.");
 	}
 	$conn->close();
 }
 ?>
+<link rel="stylesheet" href="css/add_product.css">
 <form id="add-product-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
-Title:<input type="text" name="product-title" id="product-title" required autofocus maxlength="200" placeholder="Enter title" onChange="checkTitleValid('product-title')"><br>
+Title:<br>
+<input type="text" name="product-title" id="product-title" required autofocus maxlength="200" placeholder="Enter title" onChange="checkTitleValid('product-title')"><br>
 <span id="product-title-errors" class="hidden"><br></span>
-Price:<input type="number" name="product-price" id="product-price" min="1" required placeholder="Enter price"><br>
-Description:<textarea name="product-description" id="product-description"></textarea><br>
-Total units:<input type="number" name="product-units" id="product-units" min="1" required placeholder="Number of units being sold"><br>
+Price:<br>
+<input type="number" name="product-price" id="product-price" min="1" required placeholder="Enter price"><br>
+Description:<br>
+<textarea name="product-description" id="product-description"></textarea><br>
+Total units:<br>
+<input type="number" name="product-units" id="product-units" min="1" required placeholder="Number of units being sold"><br>
+<div class="button-container">
 <button type="submit">Submit</button>
+</div>
 </form>
-<?php } else echo "Not signed in"; ?>
+<?php } else show_error_msg("You have to sign in first."); ?>
 </div>
 <?php
 include_once "footer.php";

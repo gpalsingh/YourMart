@@ -2,6 +2,11 @@
 function initSession() {
 	$_SESSION['valid'] = false;
 	$_SESSION['username']= null;
+	//Don't refresh cart even if user logs in/out
+	//Just make user log in if they want to pay
+	if (!(isset($_SESSION['cart']))) {
+		$_SESSION['cart'] = array();
+	}
 }
 
 function logoutUser() {

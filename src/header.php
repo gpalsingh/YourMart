@@ -24,6 +24,7 @@
 <li><button type="submit">GO!</button></li>
 </form>
 </li>
+<li><a href="cart.php">Cart</a></li>
 <?php if(!$_SESSION['valid'] == true) { ?>
 <li><a href="signin.php">Sign-in</a></li>
 <li><a href="register.php">Register</a></li>

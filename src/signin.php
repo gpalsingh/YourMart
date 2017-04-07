@@ -7,7 +7,9 @@ include_once "header.php"
 <h1>Sign-in to YourMart</h1>
 <link rel="stylesheet" href="css/signin.css">
 <?php
-start_new_session();
+if ($_SESSION['valid'] === TRUE) {
+	die(error_msg("Already signed in as " . $_SESSION['username']));
+}
 
 function isValidUser($uname, $pass) {
 	$conn = getDbConnection();

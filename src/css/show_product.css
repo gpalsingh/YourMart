@@ -1,22 +1,19 @@
-.hidden {
-	display: none;
+.product-details-form {
+    background-color: #afe0af;
+    border-radius: 30px;
+    padding: 2% 0px 1% 2%;
 }
 
-.form-errors {
-	display: block;
-	color: red;
+.product-details-form table {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
 }
 
-.error-general {
-	display: block;
-	color: red;
-	font-weight: bold;
-}
-
-.success-general {
-	display: block;
-	color: green;
-	font-weight: bold;
+.product-details-form input {
+    padding: 6px;
+    margin: 0px 20px 15px 0px;
+    border-radius: 17px;
 }
 
 .button-container {
@@ -25,7 +22,7 @@
 }
 
 .button-container button {
-    height: 5%;
+    height: 40px;
     width: 40%;
     border-radius: 25px;
     text-transform: uppercase;

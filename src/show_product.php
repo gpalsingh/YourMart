@@ -7,6 +7,7 @@ include_once "header.php";
 <h1>Product Details</h1>
 <?php
 $id = -1;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$conn = getDbConnection();
 	if (isset($_POST["delete_button"])) {
@@ -55,12 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		header("location:show_product.php?id=" . $_POST['pid']);
 	}
 	$conn->close();
-}
-else { //GET request code start
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-	$id = $_GET['id'];
 } else {
-	die(error_msg("Product not found"));
+//Get id if GET request
+//No need in POST because we use hidden element
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+	if (isset($_GET['id']) && !empty($_GET['id'])) {
+		$id = $_GET['id'];
+	} else {
+		die(error_msg("Product not found"));
+	}
 }
 //Get data
 $uname = ($_SESSION['valid'] === true)? $_SESSION['username']: false;
@@ -72,9 +76,15 @@ if ($conn->affected_rows < 1) {
 	die(error_msg("Failed to get data. Product does not exist."));
 }
 //Show product data
-if ($result->num_rows > 0) {
-	$row = $result->fetch_assoc();
-	if ($uname && ($uname === $row['seller'])) {
+if ($result->num_rows != 1) {
+	die(error_msg("Couldn't find data<br>"));
+}
+$row = $result->fetch_assoc();
+if ($uname && ($uname === $row['seller'])) {
+	$disabled = "";
+} else {
+	$disabled = "disabled";
+}
 	
 ?>
 <script type="text/javascript">
@@ -111,49 +121,45 @@ $(document).ready(function() {
 	});
 });
 </script>
-<form id="change-product-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+<link rel="stylesheet" href="css/show_product.css">
+<?php if ($disabled === "disabled") { ?>
+<form class="product-details-form" id="buy-product-form" action="cart.php" method="POST">
+<?php } else { ?>
+<form class="product-details-form" id="change-product-form" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" method="POST">
+<?php } ?>
 <table>
 <tr><th>Title</th>
-<td><input type="text" name="ptitle" id="ptitle" required maxlength="200" onChange="checkTitleValid('ptitle')"
+<td><input <?php echo $disabled; ?> type="text" name="ptitle" id="ptitle" required maxlength="200" onChange="checkTitleValid('ptitle')"
 value="<?php echo $row['title']; ?>"></td>
 </tr>
 <tr><th>Price</th>
-<td><input type="number" name="pprice" id="pprice" min="1" required value="<?php echo $row['price']; ?>"></td>
+<td><input <?php echo $disabled; ?> type="number" name="pprice" id="pprice" min="1" required value="<?php echo $row['price']; ?>"></td>
 </tr>
 <tr><th>Description</th>
-<td><textarea name="pdescription" id="pdescription"><?php echo $row['description']; ?></textarea></td>
+<td><textarea <?php echo $disabled; ?> name="pdescription" id="pdescription"><?php echo $row['description']; ?></textarea></td>
 </tr>
 <tr><th>Seller</th><td><?php echo $row['seller']; ?></td></tr>
 <tr><th>Units Left</th>
-<td><input type="number" name="punits" id="punits" min="1" required value="<?php echo $row['units_left']; ?>"></td>
+<td><input <?php echo $disabled; ?> type="number" name="punits" id="punits" min="1" required value="<?php echo $row['units_left']; ?>"></td>
 </tr>
 <tr><th>Operation</th>
 <td>
 <input type="hidden" name="pid" value=<?php echo $id ?>>
+<div class="button-container">
+<?php if ($disabled !== "disabled") { ?>
 <button type="submit" name="update_button">Update</button>
 <button type="submit" name="delete_button">Delete</button>
+<?php } else { ?>
+<button type="submit" name="add_to_cart_button">Add to Cart</button>
+<input type="number" name="product_count" required value="1" min="1" max="<?php echo $row['units_left']; ?>">
+<?php } ?>
+</div>
 </td>
 </tr>
 </table>
 <span id="product-change-errors" class="hidden"></span>
 </form>
-<?php
-	} else {
-	$row_str = "<table><tr><th>Title</th><td>%s</td></tr>"
- 		."<tr><th>Price</th><td>%d</td></tr>"
- 		."<tr><th>Description</th><td>%s</td></tr>"
- 		."<tr><th>Seller</th><td>%s</td></tr>"
- 		."<tr><th>Units Left</th><td>%s</td></tr></table>";
-	echo sprintf($row_str,
-			$row['title'],
-			$row['price'],
-			$row['description'],
-			$row['seller'],
-			$row['units_left']);
-	}
-}
-} //GET request code end
-?>
+<?php } //End GET request code ?>
 </div>
 <?php
 include_once "footer.php";

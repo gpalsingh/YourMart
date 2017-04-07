@@ -1,0 +1,18 @@
+#add-product-form {
+    background-color: #afe0af;
+    border-radius: 30px;
+    padding: 2% 0px 1% 2%;
+}
+
+#add-product-form table {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+#add-product-form input, textarea {
+    padding: 6px;
+    margin: 0px 20px 15px 0px;
+    border-radius: 17px;
+    width: 95%;
+}
