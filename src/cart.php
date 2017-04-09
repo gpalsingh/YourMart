@@ -8,8 +8,8 @@ include_once "header.php";
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST["add_to_cart_button"])) {
-		//Add product to session cart
 		$pid = $_POST['pid'];
+		//Add product to session cart
 		$count = $_POST['product_count'];
 		$_SESSION['cart'][$pid] = $count;
 	} else if (isset($_POST["order-button"])) {
@@ -17,7 +17,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (!$_SESSION['valid']) {
 			die(error_msg("You need to log in first"));
 		}
+		//Update item count
+		$conn = getDbConnection();
+		foreach ($_SESSION['cart'] as $id => $cnt) {
+			$sql = "SELECT units_left FROM product_data WHERE id=".$id.";";
+			$result = $conn->query($sql);
+			if ($result === FALSE) {
+				die(error_msg("Failed to get data.<br>Error:" . $conn->error));
+			}
+			$prev_count = intval($result->fetch_assoc()['units_left']);
+			$sql = "UPDATE product_data SET units_left=".($prev_count-$cnt)." WHERE id=".$id.";";
+			$result = $conn->query($sql);
+			if ($result === FALSE) {
+				die(error_msg("Failed to get data.<br>Error:" . $conn->error));
+			}
+		}
 		//Reset cart
+		$result = $conn->query("DELETE FROM product_data WHERE units_left<=0;");
+		if ($result === FALSE) {
+			die(error_msg("Failed to get data.<br>Error:" . $conn->error));
+		}
+		$conn->close();
 		$_SESSION['cart'] = array();
 		die(success_msg("Your order has been placed!"));
 	}
