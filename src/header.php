@@ -12,9 +12,20 @@
 ?>
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/header.css">
+<link rel="icon" type="image/gif" href="logo.gif">
 <script src="js/common.js" type="text/javascript"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function () {
+		//Add "YourMart" to title
+		var title = document.getElementsByTagName("title")[0];
+		title.innerHTML += " | YourMart";
+	});
+</script>
 <ul class="header test">
+<li style="padding:0px; margin:0px;">
+<a href="index.php" style="text-align:left; padding:0px;">
+<img src="logo.gif"></a></li>
 <li><a href="about.php">About Us</a></li>
 <li><a href="terms.php">Terms</a></li>
 <li><a href="index.php">Home</a></li>

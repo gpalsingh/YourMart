@@ -1,5 +1,5 @@
 .header {
-	background-color: #2874F0;
+	background-color: #27F;
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
@@ -49,10 +49,10 @@ body {
 	margin: 0;
 }
 
-.items-list-table td:not(:first-child) {
+.items-list-table tr td:not(:first-child) {
 	margin: auto;
 	text-align: center;
-	width: 50%;
+	width: 15%;
 }
 
 .nav-items-list {
