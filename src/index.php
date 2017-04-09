@@ -11,7 +11,7 @@ $conn = getDbConnection();
 
 //Find query type
 $start_pos = 0;
-$page_size = 4;
+$page_size = 6;
 $search_key = FALSE;
 if (isset($_GET['searchkey']) && !empty($_GET['searchkey'])) {
 	$search_key = $_GET['searchkey'];
